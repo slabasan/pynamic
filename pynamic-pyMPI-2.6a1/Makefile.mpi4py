@@ -7,13 +7,14 @@ NUM_UTILITIES ?= $(shell ls libutility[0123456789]*.so | wc -l)
 NUM_MODULES ?= $(shell ls libmodule[0123456789]*.so | wc -l)
 
 PYTHON_EXE_DIR = $(shell $(PYTHON_EXE) -c 'import sys; import os; print(os.path.dirname(sys.executable))')
-PYTHON_CONFIG = $(PYTHON_EXE_DIR)/python-config
+PYTHON_CONFIG = /usr/tce/packages/python/python-3.9.12/bin/python-config
 
 PYTHON_EMBED = $(shell if [ `$(PYTHON_CONFIG) --embed > /dev/null 2>&1 ; echo $$?` == 0 ] ; then echo --embed; fi)
 
 CC = mpicc
 PYTHON_CFLAGS = $(shell $(PYTHON_CONFIG) $(PYTHON_EMBED) --cflags)
 PYTHON_LDFLAGS = $(shell $(PYTHON_CONFIG) $(PYTHON_EMBED) --ldflags)
+PYTHON_CFLAGS += -I/usr/tce/packages/python/python-3.9.12/include/python3.9/Python.h
 
 CFLAGS += -Wall
 
