@@ -52,7 +52,7 @@ if not use_mpi4py:
     command = 'make dist-local'
     run_command(command)
     
-    command = 'make -j ' + str(processes)
+    command = 'make '
     run_command(command)
 else:
     command = 'make -f Makefile.mpi4py clean'
@@ -61,7 +61,7 @@ else:
     target = 'pynamic-mpi4py'
     if bigexe:
         target += ' pynamic-bigexe-mpi4py'
-    command = 'make -j ' + str(processes) + ' -f Makefile.mpi4py ' + target
+    command = 'make ' + ' -f Makefile.mpi4py ' + target
     run_command(command)
     
 if bigexe == False:
